@@ -6,7 +6,7 @@ class Vehicle:
         self._rental_price_per_day = rental_price_per_day  # Private attribute
 
     def display_info(self):
-        print(f"🚗 Vehicle: {self.brand} {self.model}, Year: {self.year}, Rental Price: ${self._rental_price_per_day}/day")
+        print(f"Vehicle: {self.brand} {self.model}, Year: {self.year}, Rental Price: ${self._rental_price_per_day}/day")
 
     def calculate_rental_cost(self, days):
         return self._rental_price_per_day * days
@@ -25,7 +25,7 @@ class Car(Vehicle):
 
     def display_info(self):
         super().display_info()
-        print(f"🪑 Seats: {self.seating_capacity}")
+        print(f"Seats: {self.seating_capacity}")
 
 
 class Bike(Vehicle):
@@ -35,7 +35,7 @@ class Bike(Vehicle):
 
     def display_info(self):
         super().display_info()
-        print(f"🏍️ Engine: {self.engine_capacity}cc")
+        print(f"Engine: {self.engine_capacity}cc")
 
 
 class VehicleRentalSystem:
@@ -46,7 +46,7 @@ class VehicleRentalSystem:
         self.vehicles.append(vehicle)
 
     def display_vehicles(self):
-        print("\n🌟 Available Vehicles:")
+        print("\nAvailable Vehicles:")
         for idx, vehicle in enumerate(self.vehicles):
             print(f"{idx + 1}. ", end="")
             vehicle.display_info()
@@ -55,18 +55,18 @@ class VehicleRentalSystem:
         if 0 <= index < len(self.vehicles):
             vehicle = self.vehicles[index]
             cost = vehicle.calculate_rental_cost(days)
-            print(f"\n🎉 You have successfully rented the {vehicle.brand} {vehicle.model} for {days} days!")
-            print(f"💰 Total rental cost: ${cost}. Enjoy your ride!")
+            print(f"\nYou have rented {vehicle.brand} {vehicle.model} for {days} days.")
+            print(f"Total rental cost: ${cost}")
         else:
-            print("🚫 Oops! That vehicle selection is invalid. Please try again.")
+            print("Invalid vehicle selection.")
 
     def update_rental_price(self, index, new_price):
         if 0 <= index < len(self.vehicles):
             vehicle = self.vehicles[index]
             vehicle.set_rental_price(new_price)
-            print(f"✅ Updated rental price for {vehicle.brand} {vehicle.model}: ${vehicle.get_rental_price()}/day")
+            print(f"Updated rental price for {vehicle.brand} {vehicle.model}: ${vehicle.get_rental_price()}/day")
         else:
-            print("🚫 Oops! That vehicle selection is invalid. Please try again.")
+            print("Invalid vehicle selection.")
 
 
 def main():
@@ -80,33 +80,32 @@ def main():
     rental_system.add_vehicle(car1)
     rental_system.add_vehicle(bike1)
 
-    print("👋 Welcome to the Vehicle Rental System! Let's get you on the road!")
-
     while True:
-        print("\n--- Vehicle Rental System Menu ---")
+        print("\n--- Vehicle Rental System ---")
         print("1. View Available Vehicles")
         print("2. Rent a Vehicle")
         print("3. Update Rental Price")
         print("4. Exit")
-        choice = input("Please enter your choice (1-4): ")
+        choice = input("Enter your choice: ")
 
         if choice == '1':
             rental_system.display_vehicles()
         elif choice == '2':
             rental_system.display_vehicles()
-            vehicle_index = int(input("Select the vehicle number you want to rent: ")) - 1
-            rental_days = int(input("How many days would you like to rent it for? "))
+            vehicle_index = int(input("Select vehicle number to rent: ")) - 1
+            rental_days = int(input("Enter number of days to rent: "))
             rental_system.rent_vehicle(vehicle_index, rental_days)
         elif choice == '3':
             rental_system.display_vehicles()
-            vehicle_index = int(input("Select the vehicle number you want to update the price for: ")) - 1
-            new_price = float(input("Enter the new rental price: "))
+            vehicle_index = int(input("Select vehicle number to update price: ")) - 1
+            new_price = float(input("Enter new rental price: "))
             rental_system.update_rental_price(vehicle_index, new_price)
         elif choice == '4':
-            print("👋 Thank you for using the Vehicle Rental System! Safe travels!")
+            print("Thank you for using the Vehicle Rental System!")
             break
         else:
-            print("🚫 Invalid choice. Please try again.")
+            print("Invalid choice. Please try again.")
+
 
 if __name__ == "__main__":
     main()
